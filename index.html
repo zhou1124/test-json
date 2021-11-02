@@ -35,7 +35,7 @@
 <script>
     $("#btn").click(function () {
         let email = $("#email").val();
-        $.get("http://fssosc.org:8848/queryEmail?email="+email, function (data) {
+        $.get("https://manage-api.sim.allschool.com/api2/json/queryEmail?email="+email, function (data) {
                $("#emailText").html(data.email);
                 $("#score").html(data.result);
       });
