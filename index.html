@@ -29,24 +29,16 @@
     邮箱：<a href="#" id="emailText"></a><br/>
     分数：<a href="#" id="score"></a>
 
-    <b id="json"></b>
-
 </p>
 
 
 <script>
-    let json = [{"email": "zhoupengfei", "score": 1000}, {"email": "zhangjianli", "score": 80}]
     $("#btn").click(function () {
-        console.log("aaa")
         let email = $("#email").val();
-        for (let i = 0; i < json.length; i++) {
-            if (email == json[i].email) {
-                debugger;
-                $("#emailText").html(json[i].email);
-                $("#score").html(json[i].score);
-
-            }
-        }
+        $.get("http://fssosc.org:8848/queryEmail?email="+email, function (data) {
+               $("#emailText").html(data.email);
+                $("#score").html(data.result);
+      });
     })
 
 </script>
