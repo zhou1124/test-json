@@ -1,0 +1,60 @@
+<!--用来测试跨域-->
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        // $(document).ready(function () {
+        //     $("p").click(function () {
+        //         $(this).hide();
+        //     });
+        // });
+        // $.get("https://hulk-op.qa.huohua.cn/api/product/status/list", function () {
+        //
+        // });
+        //
+        // $.get(" http://10.251.171.50:8080/product/status/list", function () {
+        //
+        // });
+    </script>
+
+</head>
+
+<body>
+<form>
+    First name: <input id="email" name="email" type="text"><br>
+    <input id="btn" type="button" value="Submit">
+</form>
+
+<p>
+    邮箱：<a href="#" id="emailText"></a><br/>
+    分数：<a href="#" id="score"></a>
+
+    <b id="json"></b>
+
+</p>
+
+
+
+
+<script>
+
+    let json = [{"email": "zhoupengfei", "score": 1000}, {"email": "zhangjianli", "score": 80}]
+    json = $('#json').html();
+    console.info(json)
+    $("#btn").click(function () {
+        console.log("aaa")
+        let email = $("#email").val();
+        for (let i = 0; i < json.length; i++) {
+            if (email == json[i].email) {
+                debugger;
+                $("#emailText").html(json[i].email);
+                $("#score").html(json[i].score);
+
+            }
+        }
+    })
+
+</script>
+</body>
+
+</html>
