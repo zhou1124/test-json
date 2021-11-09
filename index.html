@@ -1,43 +1,180 @@
-<!--用来测试跨域-->
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript">
-        // $(document).ready(function () {
-        //     $("p").click(function () {
-        //         $(this).hide();
-        //     });
-        // });
-        // $.get("https://hulk-op.qa.huohua.cn/api/product/status/list", function () {
-        //
-        // });
-        //
-        // $.get(" http://10.251.171.50:8080/product/status/list", function () {
-        //
-        // });
-    </script>
-
 </head>
 
 <body>
-<form>
-    First name: <input id="email" name="email" type="text"><br>
-    <input id="btn" type="button" value="Submit">
+  
+<form style="height: 16px;">
+    <span>Sign Up E-mail</span> <input id="email" name="email" type="text">
+    <button  style="margin-left: 5px;" id="btn" type="button" value="Submit">Click to search</button>
 </form>
+<div class="clear">
+</div>
+<div class="nest">
+      <div class="nest1">
+        <span>Email address found&nbsp;</span>
+      </div>
+      <div id="emailText"  name="otherText"  class="other"></div>
+</div>
+<div class="clear">
+</div>
+  
+    <div class="nest">
+      <div class="nest1">
+        <span>Your application status&nbsp;</span>
+      </div>
+      <div id="score"  name="otherText"  class="other"></div>
+    </div>
 
-<p>
-    邮箱：<a href="#" id="emailText"></a><br/>
-    分数：<a href="#" id="score"></a>
+  <div class="clear">
+  </div>
 
-</p>
+  <div class="nest">
+    <div class="nest1">
+        <span>Next steps&nbsp;</span>
+        </div>
+      <div id="other"  name="otherText"  class="other1"></div>
+  </div>
+<style type="text/css">
+.nest1{
+    height: 20px;
+    width: 189px;
+    float: left;
+    margin-top: 3px;
+}
+.nest{
 
+}
+span{
+  display: inline-block;
+  width: 184px;
+  font-weight: bolder;
+  text-align: right;
 
+}
+ input{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 5px 5px;
+    width: 300px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+.other{
+    padding: 5px 5px;
+    width: 291px;
+    min-height: 20px;
+    font-size: 14px;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    color:#000;
+    font-weight: bold;
+    font-family: "Microsoft soft";
+    min-height: 20px;
+    float: left;
+    width: 450px;
+}
+.fail{
+  border: 1px solid red; 
+  color: red;
+}
+.success{
+  border: 1px solid green; 
+  color: green;
+
+}
+p{
+  height: 3px;
+  clear: both;
+    
+}
+.plast{
+    padding: 13px 0px;
+   min-height: 20px;
+    width: 176px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    float: left;
+}
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+button{
+      width: 150px;/*设置按钮宽度*/
+      height: 31px;/*设置按钮高度*/
+      color:white;/*字体颜色*/
+      background-color:#ff9300;/*按钮背景颜色*/
+      border-radius: 3px;/*让按钮变得圆滑一点*/
+      border-width: 0;/*消去按钮丑的边框*/
+      margin: 0;
+      outline: none;/*取消轮廓*/
+      font-family: KaiTi;/*字体设置为楷体*/
+      font-size: 17px;/*设置字体大小*/
+      text-align: center;/*字体居中*/
+      cursor: pointer;/*设置鼠标箭头手势*/
+    }
+button:hover{/*鼠标移动时的颜色变化*/
+      background-color: #8a5209;
+}
+.clear{
+  clear: both;
+  display: block;
+  height: 3px;
+}
+
+.other1{
+    padding: 5px 5px;
+    min-width: 291px;
+    min-height: 20px;
+    font-size: 14px;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    color:#000;
+    font-weight: bold;
+    font-family: "Microsoft soft";
+    min-height: 20px;
+    float: left;
+    width: 450px;
+    word-break: break-word;
+}
+</style>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
     $("#btn").click(function () {
         let email = $("#email").val();
-        $.get("https://manage-api.sim.allschool.com/api2/json/queryEmail?email="+email, function (data) {
+        if(email==''){
+          return;
+        }
+        $("#emailText").html("loading");
+        $("#score").html("");
+        $("#other").html("");
+        $("#emailText").removeClass("success")
+        $("#emailText").removeClass("fail")
+       $.get("https://manage-api.allschool.com/api2/json/queryEmail?email="+email, function (data) {
+      //$.get("http://127.0.0.1:8848/queryEmail?email="+email, function (data) {
                $("#emailText").html(data.email);
-                $("#score").html(data.result);
+               if(!data.result){
+                   return;
+                   $("#emailText").addClass("success")
+                   $("#emailText").addClass("fail")
+               }
+              var textR=data.other;
+              var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
+              var imgSRC=$('.thread_mess img').attr('src');
+              if(reg.exec(imgSRC)){
+                  return false
+              }else{
+                textR = textR.replace(reg, "<a href='$1$2' target='_blank'>$1$2</a>");
+              }
+               $("#score").html(data.result);
+               $("#other").html(textR);
+              
       });
     })
 
