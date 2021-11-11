@@ -1,5 +1,39 @@
-var personImg=document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"] span[class="nc684nl6"]');
-var i=1;
+
+// 封装一个get请求的方法
+function getJSON(url) {
+    return new Promise(function(resolve, reject) {
+        var XHR = new XMLHttpRequest();
+        XHR.open('GET', url, true);
+        XHR.send();
+ 
+        XHR.onreadystatechange = function() {
+            if (XHR.readyState == 4) {
+                if (XHR.status == 200) {
+                    try {
+                        var response = JSON.parse(XHR.responseText);
+                        resolve(response);
+                    } catch (e) {
+                        reject(e);
+                    }
+                } else {
+                    reject(new Error(XHR.statusText));
+                }
+            }
+        }
+    })
+}
+function send(){
+	console.info("发送消息")
+	// setTimeout(()=>{
+	// 	var sendMessage = document.createEvent('MouseEvents');
+	// 	sendMessage.initMouseEvent('click', true, false);
+	// 	document.querySelectorAll('div[aria-label="按 Enter 键发送"]')[0].dispatchEvent(sendMessage);
+	// 	},1000)
+}
+
+
+var personImg=document.querySelectorAll('div[class="obtkqiv7"] span[class="nc684nl6"]');
+var i=26;
 setInterval(()=>{
     i++;
     console.info("第"+i+"个");
@@ -7,9 +41,8 @@ setInterval(()=>{
         //js控制滚动条到底部
         window.scrollTo(0, document.body.scrollHeight);
         i=i-1;
-        personImg=document.querySelectorAll('div[data-visualcompletion="ignore-dynamic"] span[class="nc684nl6"]');
-
-    }
+        personImg=document.querySelectorAll('div[class="obtkqiv7"] span[class="nc684nl6"]');
+        }
     console.info("模拟鼠标悬停 弹出个人信息窗口");
 //模拟鼠标悬停 弹出个人信息窗口
 var evObj = document.createEvent('MouseEvents');
@@ -37,44 +70,34 @@ setTimeout(()=>{
         document.querySelectorAll('div[contenteditable]')[0].focus();
         var innerHtml='<span data-text="true">abc火花1</span>'
         document.querySelectorAll('div[contenteditable] span[data-offset-key]')[0].innerHTML=innerHtml
-    
-        var evObjChange = document.createEvent('MouseEvents');
-        evObjChange.initMouseEvent('change', true, false);
-        document.querySelectorAll('div[contenteditable] span[data-offset-key]')[0].dispatchEvent(evObjChange);
     }
     },5000);
 console.info("关闭聊天窗口");
+
+setTimeout(()=>{
+	var eventType='keydown';
+    var element=document.querySelectorAll('div[contenteditable]')[0];
+	var objInput =element;
+	element.focus();
+	setTimeout()
+	getJSON("https://www.facebook.com/keydown").then(res=>{
+//发送聊天信息
+		send();
+	},()=>{
+send();
+	})
+},8000);
+
 //关闭聊天窗口 
 setTimeout(()=>{
 	var sendMessage = document.createEvent('MouseEvents');
 	sendMessage.initMouseEvent('click', true, false);
 	document.querySelectorAll('div[aria-label="关闭聊天窗口"')[0].dispatchEvent(sendMessage);
-	},8000)
+	},9000)
 
 },10000)
 
 
-
-
-
-
-
-document.querySelectorAll('div[data-contents] div[data-editor]')[0]
-//发送聊天信息
-setTimeout(()=>{
-var sendMessage = document.createEvent('MouseEvents');
-sendMessage.initMouseEvent('click', true, false);
-document.querySelectorAll('div[aria-label="按 Enter 键发送"]')[0].dispatchEvent(sendMessage);
-},15000)
-
-
-document.querySelectorAll('div[data-contents] div[data-editor]')[0];
-//发送聊天信息
-setTimeout(()=>{
-var sendMessage = document.createEvent('MouseEvents');
-sendMessage.initMouseEvent('click', true, false);
-document.querySelectorAll('span[class="tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41"]')[0].dispatchEvent(sendMessage);
-},15000)
 
 
 
