@@ -119,10 +119,11 @@ function getJSON(url) {
     })
 }
 function send(){
+	console.info("发送消息")
 	setTimeout(()=>{
 		var sendMessage = document.createEvent('MouseEvents');
 		sendMessage.initMouseEvent('click', true, false);
-		document.querySelectorAll('span[class="tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41"]')[0].dispatchEvent(sendMessage);
+		document.querySelectorAll('div[aria-label="按 Enter 键发送"]')[0].dispatchEvent(sendMessage);
 		},1000)
 }
 setTimeout(()=>{

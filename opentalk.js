@@ -99,10 +99,10 @@ setTimeout(()=>{
 console.info("发送消息");
 setTimeout(()=>{
 	write();
-},6000);
+},7000);
 console.info("关闭聊天窗口");
-setTimeout(()=>{ closeMessage();},9000)
-},10000);
+setTimeout(()=>{ closeMessage();},10000)
+},11000);
 
 
 
