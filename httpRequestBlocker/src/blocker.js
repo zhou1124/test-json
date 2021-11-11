@@ -18,6 +18,8 @@ function getJSON(url) {
               }
           }
       };
+  }).catch((e) => {
+    console.info(e)
   });
 }
 
